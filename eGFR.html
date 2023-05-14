@@ -29,8 +29,8 @@
 
 	<script>
 		// Get the input elements
-		var scrInput = document.getElementById("scr");
-		var ageInput = document.getElementById("age");
+		var scrInput = document.getElementById("scr");//default value is 1 and needs to be displayed as 1.0
+		var ageInput = document.getElementById("age");//default value is 50 and needs to be displayed as 50
 		var sexInput = document.getElementById("sex");
 
 		// Get the output element
@@ -80,6 +80,27 @@
 		sexInput.addEventListener("change", updateEGFR);
 
 		// Update eGFR output initially with default input values
+		// Define a function to update eGFR output based on input values
+function updateEGFR() {
+    // Get the input values
+    var scr = Number(scrInput.value) || 1; // default to 1 if input value is empty or invalid
+    var age = Number(ageInput.value) || 50; // default to 50 if input value is empty or invalid
+    var sex = sexInput.value;
+
+    // Calculate eGFR using input values
+    var egfr = calculateEGFR(scr, age, sex);
+
+    // Update eGFR output with calculated value
+    egfrOutput.textContent = egfr;
+}
+// Set default values for creatinine and age
+scrInput.value = 1;
+ageInput.value = 50;
+sexInput.value = "female";
+
+// Call updateEGFR function to calculate and display eGFR for default values
+updateEGFR();
+
 		updateEGFR();
 	</script>
 </body>
