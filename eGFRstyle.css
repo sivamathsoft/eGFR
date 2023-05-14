@@ -1,0 +1,70 @@
+/* Set global styles */
+* {
+    box-sizing: border-box;
+    font-family: Verdana, Arial;
+  }
+  
+  body {
+    background-color: #dabdd0;
+  }
+  h1 {
+    color: #111213;
+    font-size: 30px;
+    font-weight: bold;
+    margin: 20px 0;
+    text-align: center;
+  }
+  /* Set styles for form */
+  form {
+    background-color: #addcbe;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin: 20px auto;
+    max-width: 600px;
+    padding: 20px;
+  }
+  
+  form label {
+    display: block;
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  form input[type="number"],
+  form select {
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    display: block;
+    font-size: 16px;
+    margin-bottom: 20px;
+    padding: 20px;
+    width: 100%;
+  }
+  
+  form select {
+    background-color: #307d92;
+  }
+  
+  /* Set styles for output */
+  #egfr-container {
+    margin-top: 10px;
+  }
+  
+  #egfr-label {
+    display: inline-block;
+    width: 70px;
+  }
+  
+  #egfr-output-container {
+    display: inline-block;
+    width: 70%;
+  }
+  
+  #egfr-output {
+    font-size: 30px;
+    font-weight: bold;
+    color: #111213;
+  }
+  
+  

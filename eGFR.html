@@ -1,0 +1,86 @@
+<!--Create a slider to get eGFR from Serum creatinine, Age and Sex to give output slider with number accurate to 2 digits postdecimal-->
+<!DOCTYPE html>
+<html>
+<head>
+	<title>eGFR Calculator</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel ="stylesheet" href="eGFRstyle.css">
+
+</head>
+<body>
+	<form>
+		<h1>eGFR Calculator</h1>
+		<label for="scr">Serum Creatinine (mg/dL):</label>
+		<input type="number" id="scr" name="scr" step="0.01">
+		<br>
+		<label for="age">Age (years):</label>
+		<input type="number" id="age" name="age">
+		<br>
+		<label for="sex">Sex:</label>
+		<select id="sex" name="sex">
+			<option value="male">Male</option>
+			<option value="female">Female</option>
+		</select>
+		<br>
+		<label for="egfr">eGFR (mL/min/1.73m<sup>2</sup>):</label>
+		<span id="egfr"></span>
+	</form>
+
+	<script>
+		// Get the input elements
+		var scrInput = document.getElementById("scr");
+		var ageInput = document.getElementById("age");
+		var sexInput = document.getElementById("sex");
+
+		// Get the output element
+		var egfrOutput = document.getElementById("egfr");
+
+		// Define the constants
+		var kFemale = 0.7;
+		var kMale = 0.9;
+		var alphaFemale = -0.329;
+		var alphaMale = -0.411;
+
+		// Define a function to calculate eGFR
+		function calculateEGFR(scr, age, sex) {
+			// Get the values of k and alpha based on sex
+			var k = sex == "female" ? kFemale : kMale;
+			var alpha = sex == "female" ? alphaFemale : alphaMale;
+
+			// Calculate eGFR using CKD EPI formula
+			var egfr = 141 * Math.min(scr / k, 1) ** alpha * Math.max(scr / k, 1) ** (-1.209) * 0.993 ** age;
+
+			// If female, multiply by 1.018
+			if (sex == "female") {
+				egfr *= 1.018;
+			}
+
+			// Return eGFR rounded to two decimal places
+			return egfr.toFixed(0);
+		}
+
+		// Define a function to update eGFR output based on input values
+		function updateEGFR() {
+			// Get the input values
+			var scr = Number(scrInput.value);
+			var age = Number(ageInput.value);
+			var sex = sexInput.value;
+
+			// Calculate eGFR using input values
+			var egfr = calculateEGFR(scr, age, sex);
+
+			// Update eGFR output with calculated value
+			egfrOutput.textContent = egfr;
+		}
+
+		// Add event listeners to input elements to update eGFR output when they change
+		scrInput.addEventListener("input", updateEGFR);
+		ageInput.addEventListener("input", updateEGFR);
+		sexInput.addEventListener("change", updateEGFR);
+
+		// Update eGFR output initially with default input values
+		updateEGFR();
+	</script>
+</body>
+</html>
